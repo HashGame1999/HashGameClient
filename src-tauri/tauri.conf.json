@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "HashGame",
+  "version": "0.1.0",
+  "identifier": "hashgame.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist",
+    "removeUnusedCommands": true
+  },
+  "app": {
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": false,
+        "title": "HashGame",
+        "width": 1280,
+        "height": 1000
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {
+    
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/192x192.png",
+      "icons/512x512.png",
+      "icons/icon.ico"
+    ]
+  }
+}
