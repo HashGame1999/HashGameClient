@@ -1,7 +1,7 @@
 import Dexie from 'dexie'
-import { call, put, takeLatest, select, delay } from 'redux-saga/effects'
+import { call, put, takeLatest, select } from 'redux-saga/effects'
 import { updateWalletInfo, updateTrustLineList, loadHistroyTxsStart, loadHistroyTxsSuccess, loadIssuerCurrencyListStart, loadIssuerCurrencyListSuccess, submitActionStart, submitActionSuccess, loadSendCurrencyListStart, loadSendCurrencyListSuccess, updateOfferList, loadConvertPathStart, loadConvertPathSuccess, resetWallet } from '../slices/CounterSlice'
-import { fetchAccountInfo, fetchAccountLines, fetchAccountTxs, fetchIssuerCurrencyList, submitTrustSet, submitPayment, submitOfferCreate, fetchAccountOffers, submitOfferCancel, fetchOfferBook, submitAccountDelete, fetchConvertPath, submitPathPayment, submitPlayPayment } from './RippleSaga'
+import { fetchAccountInfo, fetchAccountLines, fetchAccountTxs, fetchIssuerCurrencyList, submitTrustSet, submitPayment, submitOfferCreate, fetchAccountOffers, submitOfferCancel, submitAccountDelete, fetchConvertPath, submitPathPayment, submitPlayPayment, fetchOfferBookRight, fetchOfferBookLeft } from './RippleSaga'
 import { formatMemo } from '../../lib/RippleUtil'
 import { DefaultCoinCode, DefaultCoinIssuer, PaySubAction, TxResult, TxType } from '../../lib/RippleConst'
 import { convertHexToString } from 'xrpl'
@@ -212,7 +212,8 @@ function* Submit({ payload }) {
         TakerGets: payload.TakerGets
       })
       if (response.result === TxResult.Success) {
-        yield call(fetchOfferBook)
+        yield call(fetchOfferBookRight)
+        yield call(fetchOfferBookLeft)
         yield call(fetchWalletInfo)
         yield call(fetchTrustLineList)
       }
@@ -225,7 +226,8 @@ function* Submit({ payload }) {
         offer_sequence: payload.offer_sequence
       })
       if (response.result === TxResult.Success) {
-        yield call(fetchOfferBook)
+        yield call(fetchOfferBookRight)
+        yield call(fetchOfferBookLeft)
         yield call(fetchWalletInfo)
         yield call(fetchTrustLineList)
       }

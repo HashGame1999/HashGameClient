@@ -189,58 +189,64 @@ export default function TabTrade() {
 
   // form place holder
   useEffect(() => {
-        if (baseAsset !== undefined && counterAsset !== undefined) {
-    setDisplayBaseAsset(baseAsset === DefaultCoinCode ? baseAsset : baseAsset.split('.')[0])
-    setDisplayCounterAsset(counterAsset === DefaultCoinCode ? counterAsset : counterAsset.split('.')[0])
+    if (baseAsset !== undefined && counterAsset !== undefined) {
+      setDisplayBaseAsset(baseAsset === DefaultCoinCode ? baseAsset : baseAsset.split('.')[0])
+      setDisplayCounterAsset(counterAsset === DefaultCoinCode ? counterAsset : counterAsset.split('.')[0])
 
-    setLeftTable([])
-    setRightTable([])
+      setBuyAmount('')
+      setBuyPrice('')
+      setBuyVaule('')
 
-    setBuyAmount('')
-    setBuyPrice('')
-    setBuyVaule('')
+      setSellAmount('')
+      setSellPrice('')
+      setSellVaule('')
 
-    setSellAmount('')
-    setSellPrice('')
-    setSellVaule('')
+      if (baseAsset === DefaultCoinCode && walletInfo) {
+        setHolderBaseAsset(dropsToXrp(walletInfo.account_data.Balance))
+      } else {
+        const [currency, account] = baseAsset.split('.')
+        let match_line = TrustLineList?.find(line => line.currency === currency && line.account === account)
+        if (match_line) {
+          setHolderBaseAsset(match_line.balance)
+        }
+      }
 
-    if (baseAsset === DefaultCoinCode && walletInfo) {
-      setHolderBaseAsset(dropsToXrp(walletInfo.account_data.Balance))
-    } else {
-      const [currency, account] = baseAsset.split('.')
-      let match_line = TrustLineList?.find(line => line.currency === currency && line.account === account)
-      if (match_line) {
-        setHolderBaseAsset(match_line.balance)
+      if (counterAsset === DefaultCoinCode && walletInfo) {
+        setHolderCounterAsset(dropsToXrp(walletInfo.account_data.Balance))
+      } else {
+        const [currency, account] = counterAsset.split('.')
+        let match_line = TrustLineList?.find(line => line.currency === currency && line.account === account)
+        if (match_line) {
+          setHolderCounterAsset(match_line.balance)
+        }
+      }
+
+      if (baseAsset !== counterAsset) {
+        dispatch({ type: 'FetchOfferBookRight' })
+        dispatch({ type: 'FetchOfferBookLeft' })
+        if (!isActive) {
+          setIsActive(true)
+          setCountdown(RefreshTime)
+        }
+      } else {
+        setLeftTable([])
+        setRightTable([])
       }
     }
-
-    if (counterAsset === DefaultCoinCode && walletInfo) {
-      setHolderCounterAsset(dropsToXrp(walletInfo.account_data.Balance))
-    } else {
-      const [currency, account] = counterAsset.split('.')
-      let match_line = TrustLineList?.find(line => line.currency === currency && line.account === account)
-      if (match_line) {
-        setHolderCounterAsset(match_line.balance)
-      }
-    }
-
-    if (baseAsset !== counterAsset) {
-      dispatch({ type: 'FetchOfferBook' })
-      if (!isActive) {
-        setIsActive(true)
-        setCountdown(RefreshTime)
-      }
-    }
-  }
   }, [baseAsset, counterAsset, walletInfo, TrustLineList])
 
   useEffect(() => {
+    // console.log(countdown)
     if (isActive && countdown > 0) {
       intervalRef.current = setInterval(() => {
         setCountdown(prevCount => prevCount - 1)
       }, 1000)
+      if (countdown === 5) {
+        dispatch({ type: 'FetchOfferBookRight' })
+      } else if (countdown === 10) {
+        dispatch({ type: 'FetchOfferBookLeft' })
+      }
     } else if (isActive && countdown === 0) {
-      dispatch({ type: 'FetchOfferBook' })
       setCountdown(RefreshTime)
     }
 

@@ -290,12 +290,12 @@ export function* fetchIssuerCurrencyList(payload) {
   }
 }
 
-export function* fetchOfferBook() {
+export function* fetchOfferBookRight() {
   const baseAsset = yield select(state => state.Counter.baseAsset)
   const counterAsset = yield select(state => state.Counter.counterAsset)
   const activeTabWallet = yield select(state => state.Counter.activeTabWallet)
   if (activeTabWallet === WalletPageTab.Trade && baseAsset !== counterAsset) {
-    console.log(`sage***xrplSaga:fetchOfferBook`)
+    // console.log(`sage***xrplSaga:fetchOfferBookRight`)
     let pay_asset = { currency: DefaultCoinCode }
     let get_asset = { currency: DefaultCoinCode }
     if (baseAsset !== DefaultCoinCode) {
@@ -327,6 +327,31 @@ export function* fetchOfferBook() {
       console.log(error)
       yield put(setOfferBookRight([]))
     }
+  }
+}
+
+export function* fetchOfferBookLeft() {
+  const baseAsset = yield select(state => state.Counter.baseAsset)
+  const counterAsset = yield select(state => state.Counter.counterAsset)
+  const activeTabWallet = yield select(state => state.Counter.activeTabWallet)
+  if (activeTabWallet === WalletPageTab.Trade && baseAsset !== counterAsset) {
+    // console.log(`sage***xrplSaga:fetchOfferBookLeft`)
+    let pay_asset = { currency: DefaultCoinCode }
+    let get_asset = { currency: DefaultCoinCode }
+    if (baseAsset !== DefaultCoinCode) {
+      let [currency, issuer] = baseAsset.split('.')
+      pay_asset = {
+        issuer: issuer,
+        currency: currency
+      }
+    }
+    if (counterAsset !== DefaultCoinCode) {
+      let [currency, issuer] = counterAsset.split('.')
+      get_asset = {
+        issuer: issuer,
+        currency: currency
+      }
+    }
 
     // left
     try {
@@ -346,7 +371,7 @@ export function* fetchOfferBook() {
 }
 
 export function* fetchConvertPath(payload) {
-  console.log(`sage***xrplSaga:fetchConvertPath`, payload)
+  // console.log(`sage***xrplSaga:fetchConvertPath`, payload)
   const { address, destination_amount, paths } = payload
   try {
     if (xrplClient?.isConnected()) {
@@ -557,5 +582,6 @@ export function* watchRipple() {
   yield takeEvery('ConnectXRPL', connectXRPL)
   yield takeEvery('DisconnectXRPL', disconnectXRPL)
   yield takeEvery('SubscribeGameAccounts', subscribeGameAccounts)
-  yield takeLatest('FetchOfferBook', fetchOfferBook)
+  yield takeLatest('FetchOfferBookRight', fetchOfferBookRight)
+  yield takeLatest('FetchOfferBookLeft', fetchOfferBookLeft)
 }
