@@ -7,11 +7,11 @@ HashGame XRP@5 is a online blockchain-based game that's transparent, fair, and v
 - High-Frequency breakdown: a draw consist of 1000 ledgers, less than half-day.
 - In time payouts: the jackpot and other prize will be paid before next draw.
 
-### Draw ID format: HashGame-XRP@5-v1.0#99000001
+### Draw ID format: HashGame-XRP@5-v1.0#99660001
 - XRP denotes all transactions shall be settled exclusively in XRP through xrpl.
 - 5 denotes the JackpotCode length.
 - 1.0 defines the version of game rules, more game setting detail will be published by **SettingAccount**(**r99919888p3cmJJR3RwATzhR5pCebJqzwd**).
-- 99000001 denotes this draw begins at xrp ledger#99000001.
+- 99660001 denotes this draw begins at xrp ledger#99660001.
 
 ## HashGame XRP@5 Rules:
 - 1 XRP gets you a HashGame code, N XRP gets you N codes.
@@ -20,21 +20,21 @@ HashGame XRP@5 is a online blockchain-based game that's transparent, fair, and v
 
 ## How to play:
 ### Buy game code:
--  **GameAccount**(**rGame2259FRZwRYHCZsQT8JWiFDWpvPjCd**)
-- Draw#99000001 is composed of xrp ledger from 99000001 to 99001000,
+- **GameAccount**(**rGame2259FRZwRYHCZsQT8JWiFDWpvPjCd**)
+- Draw#99660001 is composed of xrp ledger from 99660001 to 99661000,
 - During those ledger, payment to the **GameAccount** will get a ticket.
-- A ticket of N code will be generated for a payment larger than N XRP , for example: 
+- A ticket of N code will be generated for a payment larger than N XRP, for example: 
 	- Payment of 1 XRP gets 1 code: first 5 character of payment tx_hash
 	- Payment of 3 XRP gets 3 code:
 		- First code: first 5 character of payment tx_hash
-		- Second code:  first 5 character of hash(payment tx_hash)
-		- Third code:  first 5 character of hash(hash(payment tx_hash))
+		- Second code: first 5 character of hash(payment tx_hash)
+		- Third code: first 5 character of hash(hash(payment tx_hash))
 	- ...
 
 ### Win prize:
-- 3rd prize: frist 2 characters your code are the same with **JakepotCode**.
-- 2nd prize: frist 3 characters.
-- 1st prize: frist 4 characters.
+- 3rd prize: subcode of the frist 2 characters of your code are the same with **JakepotCode**.
+- 2nd prize: subcode of the frist 3 characters of your code are the same with **JakepotCode**.
+- 1st prize: subcode of the frist 4 characters of your code are the same with **JakepotCode**.
 - Jackpot: your code is the same with **JakepotCode**.
 
 ### Invite friend: 
@@ -42,7 +42,7 @@ Just tell your friend to set referral address of first payment(to **GameAccount*
 
 ## Promotional Plans
 ### Shareholder Plan: 
-Any XRP holder who send 10000 XRP to **MasterAccount**(**rBoy4AAAAA9qxv7WANSdP5j5y59NP6soJS**) before XRP Ledger#99000001 becomes our shareholder, participate in annual dividends.
+Any XRP holder who send 10000 XRP to **MasterAccount**(**rBoy4AAAAA9qxv7WANSdP5j5y59NP6soJS**) before XRP Ledger#99660001 becomes our shareholder, participate in annual dividends.
 
 ### Early bird Plan:
 - First player buys 10 code get 160 XRP(from operating fee) award.
@@ -50,8 +50,13 @@ Any XRP holder who send 10000 XRP to **MasterAccount**(**rBoy4AAAAA9qxv7WANSdP5j
 - First player buys 1,000 codes get 4000 XRP(from operating fee) award.
 - First player buys 10,000 codes get 20,000 XRP(from operating fee) award.
 - First player buys 100,000 codes get 100,000 XRP(from operating fee) award.
+
 ### Invitation Plan:
-- Player who buys 10 codes unlocks H1(short for HashOne) partnership; 100 codes unlocks H2 partnership; 1,000 codes unlocks H3 partnership; 10,000 codes unlocks H4 partnership; 100,000 codes unlocks H5 partnership.
+- Player who buys 10 codes unlocks H1(short for HashOne) partnership;
+- Player who buys 100 codes unlocks H2 partnership;
+- Player who buys 1,000 codes unlocks H3 partnership;
+- Player who buys 10,000 codes unlocks H4 partnership;
+- Player who buys 100,000 codes unlocks H5 partnership.
 - Hx partner: earn x XRP(from operating fee) commission for every 100 codes your invited players bought.
 
 ## Validate
