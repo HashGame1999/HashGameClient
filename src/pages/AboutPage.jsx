@@ -10,7 +10,7 @@ HashGame XRP@5 is a online blockchain-based game that's transparent, fair, and v
 - High payout rate: 92% of all income will be used to payout, only 8% for operating.
 - Massive jackpot: the jackpot cuts almost 50% of the prize pool.
 - Big winnings: 4096 XRP, 256 XRP, 64 XRP for 1st, 2nd, 3rd prize respectively.
-- High-Frequency breakdown: a draw consist of 1000 ledgers, less than half-day.
+- High-Frequency breakdown: a draw consist of 1000 ledgers, less than 70 minutes.
 - In time payouts: the jackpot and other prize will be paid before next draw.
 
 ### Draw ID format: HashGame-XRP@5-v1.0#99660001
